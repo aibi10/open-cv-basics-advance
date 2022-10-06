@@ -8,17 +8,20 @@ import cv2 as cv
 
 haar_cascade = cv.CascadeClassifier("haar_cascade.xml")
 
-capture = cv.VideoCapture("Videos/People.mp4")
+capture = cv.VideoCapture("Videos/People2.mp4")
 while True:
     isTrue, frame = capture.read()
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    #frame = cv.resize(frame, (720, 720), interpolation=cv.INTER_AREA)
 
     faces_rect = haar_cascade.detectMultiScale(
-        frame, scaleFactor=1.01, minNeighbors=1)
+        gray, scaleFactor=1.1, minNeighbors=5)
 
-    frame = cv.resize(frame, (720, 480), interpolation=cv.INTER_AREA)
+    cv.putText(frame, str(len(faces_rect)), (100, 200),
+               cv.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
 
-    cv.putText(frame, str(len(faces_rect)), (60, 20),
-               cv.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 1)
+    for (x, y, w, h) in faces_rect:
+        cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     cv.imshow("Video", frame)
 
@@ -26,7 +29,7 @@ while True:
         break
 
 capture.release()
-cv.destroyALlWindows()
+cv.destroyAllWindows()
 
 
 # faces_rect = haar_cascade.detectMultiScale(
