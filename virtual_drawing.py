@@ -3,11 +3,11 @@ import numpy as np
 
 cap = cv.VideoCapture(0)
 
-cap.set(3, 640)
-cap.set(4, 480)
-cap.set(10, 60)
+cap.set(3, 720)
+cap.set(4, 720)
+cap.set(10, 30)
 
-myColors = [[19, 81, 157, 179, 203, 255]]
+myColors = [[19, 53, 146, 179, 255, 255]]
 
 myColorValues = [[102, 255, 255]]
 
